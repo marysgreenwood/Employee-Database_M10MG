@@ -1,5 +1,6 @@
+
 .team-heading {
-  background-color: #e84855;
+  background-color: #c048e8;
   color: #ffffff;
 }
 
@@ -14,12 +15,12 @@
   max-width: 280px;
   width: 90%;
   min-height: 22rem;
-  background-color: #007bff;
+  background-color: #194f1b;
   color: white;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.7);
+  box-shadow: 4px 4px 8px rgba(5, 34, 13, 0.7);
   border: none;
 }
 
