@@ -1,4 +1,5 @@
 const Manager = require("./lib/Manager");
+const Employee = require("./lib/Employee");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
@@ -85,7 +86,69 @@ function appMenu() {
   }
 
   function createTeam() {
-    //code goes here
+    inquirer
+      .prompt([
+        {
+          type: "input",
+          name: "employeeName",
+          message: "What is the team employee's name?",
+          validate: (answer) => {
+            if (answer !== "") {
+              return true;
+            }
+            return "Please enter at least one character.";
+          },
+        },
+        {
+          type: "input",
+          name: "employeeId",
+          message: "What is the team employee's id?",
+          validate: (answer) => {
+            const pass = answer.match(/^[1-9]\d*$/);
+            if (pass) {
+              return true;
+            }
+            return "Please enter a positive number greater than zero.";
+          },
+        },
+        {
+          type: "input",
+          name: "employeeEmail",
+          message: "What is the team employee's email?",
+          validate: (answer) => {
+            const pass = answer.match(/\S+@\S+\.\S+/);
+            if (pass) {
+              return true;
+            }
+            return "Please enter a valid email address.";
+          },
+        },
+      ])
+      .then((answers) => {
+        const employee = new Employee(
+          answers.employeeName,
+          answers.employeeId,
+          answers.employeeEmail,
+          answers.employeeOfficeNumber
+        );
+        teamMembers.push(employee);
+        idArray.push(answers.employeeId);
+        inquirer
+          .prompt([
+            {
+              name: "additionalEmployee",
+              type: "confirm",
+              message: "Would you like to add another employee?",
+            },
+          ])
+          .then((answers) => {
+            if (answers.additionalEmployee) {
+              createTeam();
+            } else {
+              addEngineer();
+            }
+          });
+      });
   }
 
   function addEngineer() {
