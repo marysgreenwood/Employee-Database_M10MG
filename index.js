@@ -224,7 +224,7 @@ function appMenu() {
           answers.internName,
           answers.internId,
           answers.internEmail,
-          answers.internGithub
+          answers.internSchool
         );
         teamMembers.push(intern);
         idArray.push(answers.internId);
@@ -239,7 +239,7 @@ function appMenu() {
     }
     fs.writeFileSync(distPath, render(teamMembers), "utf-8");
   }
-
+  
   createManager();
 }
 
